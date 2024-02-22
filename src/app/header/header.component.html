@@ -1,0 +1,94 @@
+<div #header class="header-section" [ngClass]="{'headersticky': fixedheader }">
+  <div class="header-logo-section">
+    <img *ngIf="tabview" src="assets/images/mobile-nav.svg" class="mobile-nav"
+      data-bs-toggle="offcanvas" data-bs-target="#menu" aria-controls="menu" />
+    <div *ngIf="tabview" class="offcanvas offcanvas-start" tabindex="-1" id="menu" aria-labelledby="menu">
+      <div class="offcanvas-body">
+        <div class="action-section">
+          <a (click)="redirect('seller')" class="seller">Become a seller</a>
+          <a (click)="redirect('marketplace')">Marketplace</a>
+        </div>
+        <div class="vertical-division"></div>
+        <div class="category-section">
+          <div class="title">Categories</div>
+          <div class="categories">
+            <div class="parent-category" *ngFor="let parentcategory of categories; let i = index"
+              (click)="opencategory($event,i)">
+              <div class="category-content">
+                <span class="parentcategory-heading" (click)="redirectcategory('pv',parentcategory.parentVectortId)">{{
+                  parentcategory.parentVectorName }}</span>
+                <img *ngIf="!parentcategory.opencategory" src="assets/images/downarrow.svg" class="openmenu" />
+                <img *ngIf="parentcategory.opencategory" src="assets/images/uparrow.svg" class="closemenu" />
+              </div>
+              <div *ngIf="parentcategory.opencategory" class="subcategory-section">
+                <div class="category" *ngFor="let category of parentcategory.categoriesdata; let j = index"
+                  (click)="opensubcategory($event,i,j)">
+                  <div class="category-content">
+                    <div class="category-heading" (click)="redirectcategory('ci',category.categoryId)">{{
+                      category.categoryName }} <span>({{ category.count }})</span></div>
+                    <img *ngIf="!category.opensubcategory && category.hassubcategory" src="assets/images/downarrow.svg"
+                      class="openmenu" />
+                    <img *ngIf="category.opensubcategory && category.hassubcategory" src="assets/images/uparrow.svg"
+                      class="closemenu" />
+                  </div>
+                  <div class="subcategory-section" *ngIf="category.opensubcategory && category.hassubcategory">
+                    <div class="sub-category" *ngFor="let subcategory of category.subcategorydata">
+                      <div class="subcategory-heading" (click)="redirectcategory('sc',subcategory.subCategoryId)">{{
+                        subcategory.subcategoryname }} <span>({{ subcategory.count
+                          }})</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <img class="logo-image" src="assets/images/logo.svg" />
+  </div>
+  <div class="header-menu">
+    <a (click)="redirect('marketplace')" (mouseover)="openMarketplaceMenu()">Marketplace</a>
+    <div class="marketplace-dropdown-menu card" (mouseover)="openMarketplaceMenu()"
+      (mouseleave)="closeMarketplaceMenu()" *ngIf="showMarketplacePanel">
+      <div class="title">Categories</div>
+      <div class="categies-section">
+        <div class="parent-category" *ngFor="let parentcategory of categories; let i = index">
+          <span class="parentcategory-heading" (click)="redirectcategory('pv',parentcategory.parentVectortId)">{{
+            parentcategory.parentVectorName }}</span>
+          <div class="category-section">
+            <div class="category" *ngFor="
+                let category of parentcategory.categoriesdata;
+                let i = index
+              ">
+              <div class="category-heading" (click)="redirectcategory('ci',category.categoryId)" [ngClass]="{
+                  categorymargin: category.subcategorydata.length > 0
+                }">{{ category.categoryName }} <span>({{ category.count }})</span></div>
+              <div class="subcategory-section" [ngClass]="{
+                  subcategorymargin: category.subcategorydata.length > 0
+                }">
+                <div class="sub-category" *ngFor="
+                    let subcategory of category.subcategorydata;
+                    let i = index
+                  ">
+                  <div (click)="redirectcategory('sc',subcategory.subCategoryId)" class="subcategory-heading">{{
+                    subcategory.subcategoryname }} <span>({{ subcategory.count
+                      }})</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a (click)="redirect('seller')" class="seller">Become a seller</a>
+    <a (click)="redirect('signin')">Sign In</a>
+    <a (click)="redirect('signup')" class="join">Join</a>
+  </div>
+  <div class="header-menu-minimal">
+    <div class="action-items">
+      <button class="sigin">Sign In</button>
+      <button class="join">Join Now</button>
+    </div>
+  </div>
+</div>

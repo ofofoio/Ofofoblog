@@ -1,0 +1,40 @@
+<app-header></app-header>
+<div class="blog">
+    <div class="hero-section">
+        <div class="content-section">
+            <div class="title">Discover News & Podcasts Here</div>
+            <div class="description">Ofofo's official blog. Ofofo is a Cybersecurity marketplace designed for small and
+                medium businesses to build Cyber resilience.</div>
+            <div class="search-section">
+                <input type="text" class="supportsearch" autocomplete="off" (keyup)="onKeyUp($event.target)"
+                    (keyup.enter)="onKeyEnter()" />
+                <div class="search-text" *ngIf="searchQuery === ''">
+                    <img src="assets/images/inputsearchicon.svg" class="me-2" />
+                    Explore topics
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tags-section">
+        <div (click)="applyTag(tag)" class="tags" *ngFor="let tag of tags; let i = index" [ngClass]="{ active: tag === selectedtag }">{{ tag }}
+        </div>
+    </div>
+    <div class="blogs-section">
+        <div class="blogs" *ngFor="let blog of blogs; let i = index">
+            <div class="title">{{ blog['name'] }}</div>
+            <img class="blogimage" [defaultImage]="placeholder" [lazyLoad]="blog.image" alt="{{ blog['name'] }}" />
+            <div class="author">
+                <img class="authorimage" [defaultImage]="placeholder" [lazyLoad]="blog.authorimage" alt="{{ blog['name'] }}" />
+                <span>{{ blog.name }}</span>
+            </div>
+            <div class="author-section">
+                <span>{{ blog['last_edited_time'] | date:"MMM d, y" }}</span>
+                <span *ngIf="blog.tags.length > 0">|</span>
+                <span *ngFor="let tag of blog.tags; let i = index" class="tag">{{ tag }}</span>
+            </div>
+            <div class="description">{{ blog['meta description'] }}</div>
+            <div class="action" (click)="openBlog(blog)"><img class="arrow" src="assets/images/rightarrow.svg" alt="open blog" /><span>Continue Reading</span></div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

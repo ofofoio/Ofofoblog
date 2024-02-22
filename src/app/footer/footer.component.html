@@ -1,0 +1,87 @@
+<div class="footer-setion">
+  <div class="footer-main-setion">
+    <div class="logo-setion">
+      <img src="assets/images/logo.svg" />
+      <div class="description">
+        Ofofo is a marketplace for cybersecurity products and services, aimed at
+        small and medium businesses.
+      </div>
+      <div class="heading mt-4">Follow us on</div>
+      <div class="social-media-section">
+        <a target="_blank" href="https://www.youtube.com/@ofofostudio"
+          ><img src="assets/images/youtube.svg" alt="youtube"
+        /></a>
+        <a target="_blank" href="https://www.linkedin.com/company/ofofo"
+          ><img src="assets/images/linkedin.svg" alt="linkedin"
+        /></a>
+        <a target="_blank" href="https://www.instagram.com/ofofo.inc"
+          ><img src="assets/images/Instagram.svg" alt="instagram"
+        /></a>
+        <a target="_blank" href="https://twitter.com/tryofofo"
+          ><img src="assets/images/Twitter.svg" alt="twitter"
+        /></a>
+      </div>
+      <div class="embed" (click)="embededCode()">&lt; Embed news to your Application /&gt;</div>
+    </div>
+    <div class="about-setion">
+      <div class="heading">Company</div>
+      <div class="back-links">
+        <span (click)="redirect('seller')" class="seller">Become a seller</span>
+        <span (click)="redirect('about')" class="aboutus">About Us</span>
+        <span (click)="redirect('support')" class="support">Support</span>
+        <span (click)="redirect('join')" class="joinus">Join Us</span>
+        <span (click)="redirect('signin')" class="signin">Sign In</span>
+        <span (click)="redirect('blog')" class="blog">Blog</span>
+      </div>
+    </div>
+    <div class="cactegory-setion">
+      <div class="heading">Categories</div>
+      <div class="categories">
+        <span
+          class="category"
+          (click)="redirect('category', category.id)"
+          *ngFor="let category of categories"
+          >{{ category.name }}</span
+        >
+      </div>
+    </div>
+    <div class="adress-setion">
+      <div class="heading">Located At</div>
+
+      <div class="adress" (click)="openAdress(0)">
+        <span>Ofofo Inc.</span>
+        <span>651 N Broad St,</span>
+        <span>Middletown, DE 19709, USA</span>
+      </div>
+
+      <div class="adress" (click)="openAdress(1)">
+        <span>Ofofo S.R.L</span>
+        <span>Largo Augusto 3,</span>
+        <span>Milan 20122, Italy</span>
+      </div>
+
+      <div class="adress" (click)="openAdress(2)">
+        <span>Ofofo Pvt Ltd.</span>
+        <span>18/20, 1st Flr, Clayworks,</span>
+        <span>Create, BLR 560076, IND</span>
+      </div>
+    </div>
+  </div>
+  <div class="footer-sub-setion">
+    <div class="legal-info">
+      <span (click)="redirecttermly('privacy')">Privacy Policy</span>
+      <span>|</span>
+      <span (click)="redirecttermly('disclamer')">Disclaimer</span>
+      <span>|</span>
+      <span (click)="redirecttermly('dsar')"
+        >Data Subject Access Request (DSAR) Form</span
+      >
+      <span>|</span>
+      <span (click)="redirecttermly('info')">Do not sell my info</span>
+    </div>
+    <div class="rights">
+      Made with Zapier, ChatGPT & Notion &nbsp;&nbsp;| &nbsp; © 2023 Ofofo News.
+      All Rights Reserved.
+    </div>
+  </div>
+</div>

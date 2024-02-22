@@ -1,0 +1,130 @@
+<app-header></app-header>
+<div class="blogs" *ngIf="dataFetch">
+  <div class="blog">
+    <div class="author-section">
+      <!-- <span>{{ blogs['last_edited_time'] | date:"MMM d, y" }}</span> -->
+      <span>Jun 21</span>
+      <!-- <span *ngIf="blogs.tags.length > 0">|</span> -->
+      <div class="tag-section">
+        <span *ngFor="let tag of blogs.tags.slice(0,2); let i = index" class="tag">{{ tag }}</span>
+      </div>
+    </div>
+    <div class="title">{{ blogs['name'] }}</div>
+    <div class="description">{{ blogs['Excerpt'] }}</div>
+    <div class="social-section">
+      <div class="author">
+        <img class="authorimage" [defaultImage]="placeholder" [lazyLoad]="blogs.authorsData[0].Image"
+          alt="{{ blogs.authorsData[0].Name }}" />
+        <span>{{ blogs.authorsData[0].Name }}</span>
+      </div>
+      <div class="share"></div>
+    </div>
+    <ng-container *ngFor="let options of blogs.content; let i = index">
+      <div class="img-links"
+        *ngIf="options.type ==='external' && options.external && !options.external.url.includes('youtu')">
+        <img [src]="options.external.url" alt="{{ options.external.url }}" />
+      </div>
+      <div class="img-links"
+        *ngIf="options.type ==='external' && options.external && options.external.url.includes('youtu')">
+        <iframe [src]="blogVideo" title="YouTube video player" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen></iframe>
+      </div>
+    </ng-container>
+    <div class="main-body">
+      <div class="title-body sticky-top">
+        <div class="heading">Table of Contents</div>
+        <ng-container *ngFor="let options of blogs.content; let i = index">
+          <ng-container *ngIf="options.rich_text && options.rich_text.length > 0">
+            <ng-container class="heading" *ngIf="options.type ==='heading_2' || options.type ==='heading_1'">
+              <div *ngFor="let content of options.rich_text; let j = index" [attr.id]="i" class="boldText">
+                {{ content.text.content }}
+              </div>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+      </div>
+      <div class="content-body">
+        <ng-container *ngFor="let options of blogs.content; let i = index">
+          <ng-container *ngIf="options.rich_text && options.rich_text.length > 0">
+            <ng-container class="heading" *ngIf="options.type ==='heading_2' || options.type ==='heading_1'">
+              <div *ngFor="let content of options.rich_text; let j = index" [attr.id]="i" class="boldText">
+                {{ content.text.content }}
+              </div>
+            </ng-container>
+            <div class="paragraph" *ngIf="options.type ==='paragraph'">
+              <div *ngFor="let content of options.rich_text; let j = index"
+                [ngClass]="{ boldText: content.annotations.bold }">
+                {{ content.text.content }}
+              </div>
+            </div>
+            <ul *ngIf="options.type ==='bulleted_list_item'">
+              <li class="content" *ngFor="let content of options.rich_text; let j = index">
+                {{ content.text.content }}
+              </li>
+            </ul>
+            <div class="external-links" *ngIf="options.type ==='numbered_list_item'">
+              <span class="sideheading">{{ options.rich_text[0].text.content }}</span>
+              <a href="options.rich_text[1].text.content">{{ options.rich_text[1].text.content }}</a>
+            </div>
+          </ng-container>
+          <!-- <div class="img-links"
+          *ngIf="options.type ==='external' && options.external && !options.external.url.includes('youtu')">
+          <img [src]="options.external.url" alt="{{ options.external.url }}" />
+        </div>
+        <div class="img-links"
+          *ngIf="options.type ==='external' && options.external && options.external.url.includes('youtu')">
+          <iframe [src]="blogVideo" title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen></iframe>
+        </div> -->
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  <div class="newsletter">
+    <div class="content"></div>
+    <img class="newsletterimage" src="./assets/images/newsletter.svg"  alt="{{ blogs['name'] }}" />
+  </div>
+</div>
+<app-footer></app-footer>
+
+<div class="modal fade" id="shareModal" tabindex="-1" aria-labelledby="shareModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content share-content">
+      <div class="modal-body sharemodal-body">
+        <div class="header">
+          <span>Share</span>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="social-media-section">
+          <div (click)="share('linkedin')">
+            <img src="assets/images/linkedinshare.svg" alt="linkedin" /><span>LinkedIn</span>
+          </div>
+          <div (click)="share('whatsup')">
+            <img src="assets/images/wathsupshare.svg" alt="whatsup" /><span>WhatsApp</span>
+          </div>
+          <div (click)="share('twitter')">
+            <img src="assets/images/twittershare.svg" alt="twitter" /><span>X</span>
+          </div>
+          <div (click)="share('facebook')">
+            <img src="assets/images/facebookshare.svg" alt="twitter" /><span>Facebook</span>
+          </div>
+          <div (click)="share('insta')">
+            <img src="assets/images/instashare.svg" alt="instagram" /><span>Instagram</span>
+          </div>
+          <div (click)="share('telegram')">
+            <img src="assets/images/telegramshare.svg" alt="instagram" /><span>Telegram</span>
+          </div>
+        </div>
+        <div class="sub-header">
+          Copy Link
+          <div class="link-section" (click)="share('copy')">
+            <span>{{ urlShare }}</span>
+            <img src="assets/images/shareicon.svg" alt="share" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,78 @@
+<app-header></app-header>
+<div class="news">
+  <div class="heading">
+    <span>Cybersecurity News</span>
+  </div>
+  <div class="news-list">
+    <div class="news-artical" *ngFor="let news of news.slice(0, 9); let i = index" (click)="openNews(news.id)">
+      <div class="heading-section">{{ news.Title }}</div>
+      <div class="details-section">
+        <div class="author-section">
+          <span class="author" title="{{ news.Author }}">By {{ news.Author }}</span>
+          <span class="time ms-2 me-2">-</span>
+          <span class="time">{{ news.pubDate | date:"MMM d, y" }}</span>
+        </div>
+        <img (click)="$event.stopPropagation()" src="assets/images/share.svg" alt="share" data-bs-toggle="modal"
+          data-bs-target="#shareModal" />
+      </div>
+      <div class="description-section">{{ news.Description }}</div>
+      <div class="more-section">
+        <span>Continue Reading</span>
+        <img class="arrow" src="assets/images/rightarrow.svg" alt="open news" />
+        <img class="arrow-blue" src="assets/images/rightarrowblue.svg" alt="open news" />
+      </div>
+    </div>
+  </div>
+  <div class="pagination">
+    <div class="action-items">
+      <span (click)="prevNews()" [ngClass]="{ disable: next_cursor.length < 2 }" class="prev">
+        <img *ngIf="next_cursor.length < 2" class="arrow" src="assets/images/prevdisabled.svg" alt="prev news" />
+        <img *ngIf="next_cursor.length > 1" class="arrow" src="assets/images/prev.svg" alt="prev news" />
+        Previous</span>
+      <span (click)="nextNews()" class="next">Next<img class="arrow" src="assets/images/next.svg"
+          alt="next news" /></span>
+    </div>
+    <img class="news-dots" src="assets/images/newsdots.svg" alt="news" />
+  </div>
+</div>
+<app-footer></app-footer>
+
+<div class="modal fade" id="shareModal" tabindex="-1" aria-labelledby="shareModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content share-content">
+      <div class="modal-body sharemodal-body">
+        <div class="header">
+          <span>Share</span>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="social-media-section">
+          <div (click)="share('linkedin')">
+            <img src="assets/images/linkedinshare.svg" alt="linkedin" /><span>LinkedIn</span>
+          </div>
+          <div (click)="share('whatsup')">
+            <img src="assets/images/wathsupshare.svg" alt="whatsup" /><span>WhatsApp</span>
+          </div>
+          <div (click)="share('twitter')">
+            <img src="assets/images/twittershare.svg" alt="twitter" /><span>X</span>
+          </div>
+          <div (click)="share('facebook')">
+            <img src="assets/images/facebookshare.svg" alt="twitter" /><span>Facebook</span>
+          </div>
+          <div (click)="share('insta')">
+            <img src="assets/images/instashare.svg" alt="instagram" /><span>Instagram</span>
+          </div>
+          <div (click)="share('telegram')">
+            <img src="assets/images/telegramshare.svg" alt="instagram" /><span>Telegram</span>
+          </div>
+        </div>
+        <div class="sub-header">
+          Copy Link
+          <div class="link-section" (click)="share('copy')">
+            <span>{{ urlShare }}</span>
+            <img src="assets/images/shareicon.svg" alt="share" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
