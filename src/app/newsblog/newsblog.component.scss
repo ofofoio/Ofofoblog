@@ -4,7 +4,6 @@
   display: flex;
   flex-direction: column;
   width: 100vw;
-  padding: 0px 60px;
   margin-top: 60px;
   gap: 60px;
 
@@ -93,6 +92,25 @@
           font-size: 16px;
           font-style: normal;
           line-height: normal;
+        }
+      }
+
+      .share-section {
+        cursor: pointer;
+        display: flex;
+        gap: 8px;
+        color: #373F51;
+        font-family: Manrope-SemiBold;
+        font-size: 18px;
+        font-style: normal;
+        line-height: 24px;
+        letter-spacing: 0.5px;
+
+        img {
+          height: 24px;
+          padding: 4px 3px;
+          border-radius: 6px;
+          background: var(--Background-palette-color-bg-blue, #DFEFFC);
         }
       }
     }
@@ -199,13 +217,246 @@
   }
 
   .newsletter {
-    display: none;
+    display: flex;
     width: 100%;
     padding: 98px 60px;
     justify-content: space-between;
     align-items: center;
     background: #E9EDF4;
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 30px;
+
+      .content-section {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+
+        .title {
+          color: #373F51;
+          font-family: Manrope-Bold;
+          font-size: 32px;
+          font-style: normal;
+          line-height: normal;
+          letter-spacing: 0.5px;
+          text-transform: uppercase;
+        }
+
+        .description {
+          color: #595E6B;
+          font-family: Manrope-Medium;
+          font-size: 18px;
+          font-style: normal;
+          line-height: normal;
+          letter-spacing: 0.5px;
+        }
+      }
+
+      .action {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 20px;
+        align-self: stretch;
+        height: 100%;
+        width: 100%;
+
+        input {
+          border-radius: 4px;
+          padding: 16px;
+          border: 1px solid #373F51;
+          height: 64px;
+          width: calc(100% - 186px);
+          background-color: #E9EDF4;
+          color: #373F51;
+          font-family: Manrope-Regular;
+          font-size: 16px;
+          font-style: normal;
+          line-height: 24px;
+          letter-spacing: 0.5px;
+        }
+
+        button {
+          height: 64px;
+          width: 180px;
+          display: flex;
+          padding: 20px 30px;
+          justify-content: center;
+          align-items: center;
+          gap: 8px;
+          align-self: stretch;
+          border-radius: 4px;
+          background: #0C8CE9;
+          border-color: #0C8CE9;
+          color: #FFFDFD;
+          font-family: Manrope-SemiBold;
+          font-size: 18px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: normal;
+          clip-path: padding-box;
+        }
+
+        .nordpass-icon {
+          display: none;
+        }
+      }
+    }
   }
+
+  .related-offering-section {
+    .heading {
+      padding-left: 60px;
+      color: #121416;
+      font-family: Manrope-Bold;
+      font-size: 36px;
+      font-style: normal;
+      line-height: normal;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .offerings-list {
+      width: 100%;
+      display: flex;
+      gap: 1.5%;
+      padding: 60px;
+
+      .offering {
+        display: flex;
+        width: 32%;
+        flex-direction: column;
+        gap: 24px;
+        justify-content: flex-start;
+        align-items: flex-start;
+
+        .title {
+          color: #373F51;
+          font-family: Manrope-Bold;
+          font-size: 28px;
+          font-style: normal;
+          line-height: normal;
+          overflow: hidden;
+          height: 80px;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+        }
+
+        .blogimage {
+          height: 300px;
+          width: 100%;
+          // max-width: 620px;
+          object-fit: cover;
+          border-radius: 8px;
+        }
+
+        .author {
+          position: absolute;
+          display: flex;
+          padding: 6px 10px 6px 6px;
+          align-items: center;
+          gap: 6px;
+          border-radius: 40px;
+          background: #FFFDFD;
+          color: #373F51;
+          font-family: Manrope-Regular;
+          font-size: 14px;
+          font-style: normal;
+          line-height: normal;
+          align-self: flex-end;
+          margin-top: 360px;
+          margin-right: 10px;
+
+          .authorimage {
+            width: 20px;
+            height: 20px;
+            border-radius: 20px;
+            object-fit: contain;
+          }
+
+          span {
+            max-width: 380px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1
+          }
+        }
+
+        .author-section {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          color: #868990;
+          font-family: Manrope-Bold;
+          font-size: 13px;
+          font-style: normal;
+          line-height: normal;
+
+          .tag {
+            display: flex;
+            padding: 4px 6px;
+            justify-content: center;
+            align-items: center;
+            border-radius: 4px;
+            background: #E9EDF4;
+            backdrop-filter: blur(15px);
+            color: #868990;
+            font-family: Manrope-Medium;
+            font-size: 13px;
+            font-style: normal;
+            line-height: normal;
+          }
+        }
+
+        .description {
+          color: #6C757D;
+          font-family: Manrope-Regular;
+          font-size: 18px;
+          font-style: normal;
+          line-height: normal;
+          overflow: hidden;
+          height: 80px;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 3;
+        }
+
+        .action {
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+          gap: 8px;
+          color: #373F51;
+          font-family: Manrope-SemiBold;
+          font-size: 20px;
+          font-style: normal;
+          line-height: 30px;
+
+          span {
+            border-bottom: 2px solid #D4D6DB;
+          }
+        }
+      }
+    }
+  }
+}
+
+#overlay {
+  background: url("/assets/images/logo_anim_grey.gif") no-repeat center center !important;
+  background-color: white !important;
+  background-size: 7rem !important;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  z-index: 5000;
+  top: 0;
+  left: 0;
 }
 
 .modal-dialog {

@@ -61,24 +61,28 @@ export class MainComponent {
   }
 
   getBlogs() {
+    this.dataFetch = false;
     let body: any = {
       tags: this.selectedtag !== "All" ? this.selectedtag : '',
     };
+    if(this.searchQuery !== ""){
+      body.queryString = this.searchQuery
+    }
     this.subscriptions.push(
       this.generalService.getblogs(body).subscribe({
         next: async (res: any) => {
+          this.searchQuery = "";
           this.blogs = res.result;
           this.tags = res.tags;
+          this.dataFetch = true;
         },
         error: (error: any) => { },
       })
     );
   }
 
-  onKeyEnter() { }
-
   onKeyUp(input: any) {
-    console.log(input);
+    this.searchQuery = input.value;
   }
 
 }

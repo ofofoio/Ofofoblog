@@ -82,6 +82,14 @@ export class NewsblogComponent implements PipeTransform {
     );
   }
 
+  openBlog(blog: any) {
+    this.router.navigateByUrl(`/blog/${blog.id}`);
+  }
+
+  onKeyUp(key: any) { }
+
+  onKeyEnter() { }
+
   redirect(action: string) {
     if (action === 'home') {
       window.open(`${environment.landingpageUrl}`, '_blank');

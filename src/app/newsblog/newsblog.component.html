@@ -1,4 +1,5 @@
 <app-header></app-header>
+<div class="loader" id="overlay" *ngIf="!dataFetch"></div>
 <div class="blogs" *ngIf="dataFetch">
   <div class="blog">
     <div class="author-section">
@@ -17,7 +18,10 @@
           alt="{{ blogs.authorsData[0].Name }}" />
         <span>{{ blogs.authorsData[0].Name }}</span>
       </div>
-      <div class="share"></div>
+      <div class="share-section" (click)="$event.stopPropagation()" data-bs-toggle="modal" data-bs-target="#shareModal">
+        <img src="assets/images/share.svg" alt="share" />
+        <span>share</span>
+      </div>
     </div>
     <ng-container *ngFor="let options of blogs.content; let i = index">
       <div class="img-links"
@@ -83,8 +87,40 @@
     </div>
   </div>
   <div class="newsletter">
-    <div class="content"></div>
-    <img class="newsletterimage" src="./assets/images/newsletter.svg"  alt="{{ blogs['name'] }}" />
+    <div class="content">
+      <div class="content-section">
+        <div class="title">Sign Up for Our Newsletters</div>
+        <div class="description">Get notified to receive updates</div>
+      </div>
+      <div class="action">
+        <input type="text" placeholder="Email Id" class="supportsearch" autocomplete="off"
+          (keyup)="onKeyUp($event.target)" (keyup.enter)="onKeyEnter()" />
+        <button>SUBSCRIBE</button>
+      </div>
+    </div>
+    <img class="newsletterimage" src="./assets/images/newsletter.svg" alt="{{ blogs['name'] }}" />
+  </div>
+  <div class="related-offering-section">
+    <div class="heading">You May Also Like</div>
+    <div class="offerings-list">
+      <div class="offering" *ngFor="let blog of blogs.relatedPostsData.slice(0,2); let i = index">
+        <div class="title">{{ blog['name'] }}</div>
+        <img class="blogimage" [defaultImage]="placeholder" [lazyLoad]="blog.image" alt="{{ blog['name'] }}" />
+        <div class="author">
+          <img class="authorimage" [defaultImage]="placeholder" [lazyLoad]="blog.authorimage"
+            alt="{{ blog['name'] }}" />
+          <span>{{ blog.name }}</span>
+        </div>
+        <div class="author-section">
+          <span>{{ blog['publish data'] | date:"MMM d, y" }}</span>
+          <span *ngIf="blog.tags.length > 0">|</span>
+          <span *ngFor="let tag of blog.tags; let i = index" class="tag">{{ tag }}</span>
+        </div>
+        <div class="description">{{ blog['Excerpt'] }}</div>
+        <div class="action" (click)="openBlog(blog)"><img class="arrow" src="assets/images/rightarrow.svg"
+            alt="open blog" /><span>Continue Reading</span></div>
+      </div>
+    </div>
   </div>
 </div>
 <app-footer></app-footer>

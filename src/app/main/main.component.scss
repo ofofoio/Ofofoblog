@@ -198,3 +198,15 @@
         }
     }
 }
+
+#overlay {
+    background: url("/assets/images/logo_anim_grey.gif") no-repeat center center !important;
+    background-color: white !important;
+    background-size: 7rem !important;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    z-index: 5000;
+    top: 0;
+    left: 0;
+  }

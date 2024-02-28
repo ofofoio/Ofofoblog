@@ -1,5 +1,6 @@
 <app-header></app-header>
-<div class="blog">
+<div class="loader" id="overlay" *ngIf="!dataFetch"></div>
+<div class="blog" *ngIf="dataFetch">
     <div class="hero-section">
         <div class="content-section">
             <div class="title">Discover News & Podcasts Here</div>
@@ -7,7 +8,7 @@
                 medium businesses to build Cyber resilience.</div>
             <div class="search-section">
                 <input type="text" class="supportsearch" autocomplete="off" (keyup)="onKeyUp($event.target)"
-                    (keyup.enter)="onKeyEnter()" />
+                    (keyup.enter)="getBlogs()" />
                 <div class="search-text" *ngIf="searchQuery === ''">
                     <img src="assets/images/inputsearchicon.svg" class="me-2" />
                     Explore topics
@@ -32,7 +33,7 @@
                 <span *ngIf="blog.tags.length > 0">|</span>
                 <span *ngFor="let tag of blog.tags; let i = index" class="tag">{{ tag }}</span>
             </div>
-            <div class="description">{{ blog['meta description'] }}</div>
+            <div class="description">{{ blog['Excerpt'] }}</div>
             <div class="action" (click)="openBlog(blog)"><img class="arrow" src="assets/images/rightarrow.svg" alt="open blog" /><span>Continue Reading</span></div>
         </div>
     </div>
